@@ -405,7 +405,7 @@ details.mgmt .grid2{margin-top:12px}
     </div>
   </div>
 
-  <p class="foot">SunWrite läuft komplett in deinem Browser. Deine Handschrift verlässt dein Gerät nie.<br>Version 5 · 11.10.2026</p>
+  <p class="foot">SunWrite läuft komplett in deinem Browser. Deine Handschrift verlässt dein Gerät nie.<br>Version 6 · 11.10.2026</p>
   <p class="made"><a href="https://www.tiktok.com/@mrsunshine_original" target="_blank" rel="noopener noreferrer">made by mrsunshine</a></p>
   </div>
  </section>
@@ -2267,7 +2267,18 @@ function bindUI() {
   $('#tabWrite').onclick = () => showView('write');
   $('#tabTrain').onclick = () => showView('train');
 
+  // Manche Apps/Browser kopieren Text URL-kodiert (%20 statt Leerzeichen, %0A statt Zeilenumbruch) -> automatisch zurückwandeln
+  function fixPercent(v) {
+    const n = (v.match(/%[0-9A-Fa-f]{2}/g) || []).length;
+    if (n < 3) return v;
+    if ((v.match(/ /g) || []).length >= n) return v;
+    try { return decodeURIComponent(v); } catch (err) {
+      return v.replace(/(%[0-9A-Fa-f]{2})+/g, m => { try { return decodeURIComponent(m); } catch (e2) { return m; } });
+    }
+  }
   $('#text').addEventListener('input', e => {
+    const fixed = fixPercent(e.target.value);
+    if (fixed !== e.target.value) { e.target.value = fixed; try { e.target.setSelectionRange(fixed.length, fixed.length); } catch (err) { } }
     S.text = e.target.value.slice(0, MAX_TEXT);
     $('#count').textContent = S.text.length + ' / ' + MAX_TEXT;
     markDirty(); schedulePreview();
