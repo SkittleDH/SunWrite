@@ -25,7 +25,7 @@ body{
   font:400 18px/1.45 "Avenir Next","SF Pro Rounded",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   padding:max(22px,env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) max(56px,env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));
 }
-.wrap{max-width:680px;margin:0 auto}
+.wrap{max-width:760px;margin:0 auto}
 h1{
   font:400 clamp(46px,14vw,66px)/1 "Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   letter-spacing:-.02em;margin:10px 0 12px;
@@ -37,7 +37,7 @@ h1{
 /* Tabs */
 .seg{display:flex;gap:8px;background:var(--card);padding:6px;border-radius:999px}
 .seg button{
-  flex:1;border:0;background:transparent;color:var(--muted);font:600 19px/1 inherit;font-family:inherit;
+  flex:1;border:0;background:transparent;color:var(--muted);font-family:inherit;font-size:19px;font-weight:600;line-height:1;
   padding:18px 10px;border-radius:999px;cursor:pointer;min-height:56px;
 }
 .seg button.on{background:var(--blue);color:#fff}
@@ -57,14 +57,14 @@ h1{
 textarea{
   width:100%;min-height:280px;resize:vertical;display:block;
   background:var(--card);color:#fff;border:0;border-radius:28px;padding:24px;
-  font:400 22px/1.45 inherit;font-family:inherit;outline:none;
+  font-family:inherit;font-size:22px;font-weight:400;line-height:1.45;outline:none;
 }
 textarea::placeholder{color:#6c6d76}
 textarea:focus,select:focus-visible{box-shadow:0 0 0 2px var(--blue)}
 select{
   -webkit-appearance:none;appearance:none;width:100%;border:0;border-radius:26px;
   background:var(--card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%239a9ba3' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 22px center;
-  color:#fff;font:400 22px/1.2 inherit;font-family:inherit;padding:24px 60px 24px 26px;outline:none;min-height:70px;
+  color:#fff;font-family:inherit;font-size:22px;font-weight:400;line-height:1.2;padding:24px 60px 24px 26px;outline:none;min-height:70px;
 }
 input[type=range]{
   -webkit-appearance:none;appearance:none;width:100%;height:36px;background:transparent;margin:0;display:block;
@@ -82,7 +82,7 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 /* Buttons */
 .btn{
   -webkit-appearance:none;appearance:none;border:0;border-radius:999px;background:var(--blue);color:#fff;
-  font:600 21px/1.1 inherit;font-family:inherit;padding:22px 24px;min-height:66px;width:100%;
+  font-family:inherit;font-size:21px;font-weight:600;line-height:1.1;padding:22px 24px;min-height:66px;width:100%;
   display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;
 }
 .btn svg{width:26px;height:26px;flex:none}
@@ -113,7 +113,7 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 .chars{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:10px;margin-top:18px}
 .ch{
   position:relative;-webkit-appearance:none;appearance:none;border:0;border-radius:16px;background:var(--card);color:#fff;
-  font:500 24px/1 inherit;font-family:inherit;height:58px;cursor:pointer;
+  font-family:inherit;font-size:24px;font-weight:500;line-height:1;height:58px;cursor:pointer;
 }
 .ch.done{box-shadow:inset 0 0 0 2px var(--blue)}
 .ch.cur{background:var(--blue)}
@@ -135,6 +135,18 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 .vt button{position:absolute;top:4px;right:4px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(18,18,18,.85);color:#fff;font-size:20px;line-height:1;cursor:pointer}
 .foot{margin-top:44px;color:var(--muted);font-size:15px;text-align:center}
 
+.cols{display:block}
+@media (min-width:900px){
+  body{font-size:19px}
+  .wrap{max-width:1240px}
+  h1{font-size:72px}
+  .seg{max-width:520px}
+  .cols{display:grid;grid-template-columns:minmax(380px,460px) minmax(0,1fr);gap:44px;align-items:start}
+  .pv{position:sticky;top:16px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;-webkit-overflow-scrolling:touch;margin-top:30px;padding-bottom:8px}
+  #pages{margin-top:0}
+  .pv .cur-head{margin-top:0}
+  #cvWrap{max-width:560px}
+}
 #toast{
   position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom));transform:translateX(-50%);
   background:#2b2c33;color:#fff;border-radius:22px;padding:16px 22px;font-size:17px;max-width:min(92vw,520px);
@@ -163,6 +175,8 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 
   <!-- ====================== SCHREIBEN ====================== -->
   <main id="viewWrite">
+   <div class="cols">
+    <div class="ctl">
     <div class="blk">
       <div class="row">
         <label class="lbl" for="text">Dein Text</label>
@@ -246,13 +260,18 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
 
     <p class="hint">Die Vorschau zeigt das Ergebnis genau so, wie der Download aussehen wird – ohne Wasserzeichen, ohne Anmeldung.</p>
 
-    <div id="notice" hidden></div>
-
-    <div class="blk" id="pages"></div>
+    </div>
+    <div class="pv">
+      <div id="notice" hidden></div>
+      <div class="blk" id="pages"></div>
+    </div>
+   </div>
   </main>
 
   <!-- ====================== TRAINING ====================== -->
   <main id="viewTrain" hidden>
+   <div class="cols">
+    <div class="ctl">
     <p class="intro">Schreibe jedes Zeichen mit dem Apple Pencil (oder dem Finger) in das Feld. Deine echten Strichbewegungen werden gespeichert und später genau so zum Setzen deines Textes verwendet. Nichts wird hochgeladen.</p>
 
     <div class="blk">
@@ -283,6 +302,8 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
       <div class="chars" id="chars"></div>
     </div>
 
+    </div>
+    <div class="pv">
     <div class="cur-head">
       <b id="curChar"></b>
       <span id="curInfo"></span>
@@ -311,6 +332,8 @@ input[type=range]::-moz-range-thumb{width:34px;height:34px;border-radius:50%;bac
       <div class="vars" id="vars"></div>
       <button type="button" class="btn danger small" id="tDelAll" style="margin-top:16px">Alle Varianten dieses Zeichens löschen</button>
     </div>
+    </div>
+   </div>
   </main>
 
   <p class="foot">SunWrite läuft komplett in deinem Browser. Deine Handschrift verlässt dein Gerät nie.</p>
@@ -351,7 +374,7 @@ const ALL_CHARS = [].concat(CATS.lower.chars, CATS.upper.chars, CATS.digit.chars
 const ALIAS = { '’': "'", '‘': "'", '´': "'", '`': "'", '“': '"', '”': '"', '„': '"', '«': '"', '»': '"', '—': '–', '‐': '-', '‑': '-', '−': '-' };
 
 const DEFAULTS = {
-  size: 100, lineH: 100, letterSp: 100, strokeW: 100, mess: 20,
+  size: 100, lineH: 100, letterSp: 100, strokeW: 100, mess: 30,
   ink: '#000000', paper: '#ffffff', ruling: 'lined', format: 'a4p', wordSp: 'normal',
   seed: 1, showRef: true, auto: true, penOnly: false
 };
@@ -389,1034 +412,4 @@ function toast(msg, link) {
   }
   t.classList.add('show');
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => t.classList.remove('show'), link ? 10000 : 3600);
-}
-
-/* ============================================================
-   Speicher (IndexedDB) + Autosave
-   ============================================================ */
-const DB = {
-  db: null,
-  open() {
-    return new Promise((res, rej) => {
-      if (!('indexedDB' in window)) { rej(new Error('IndexedDB nicht verfügbar')); return; }
-      let rq;
-      try { rq = indexedDB.open('sunwrite', 1); } catch (e) { rej(e); return; }
-      rq.onupgradeneeded = () => {
-        const d = rq.result;
-        if (!d.objectStoreNames.contains('profiles')) d.createObjectStore('profiles', { keyPath: 'id' });
-        if (!d.objectStoreNames.contains('meta')) d.createObjectStore('meta');
-      };
-      rq.onsuccess = () => { DB.db = rq.result; res(); };
-      rq.onerror = () => rej(rq.error);
-      rq.onblocked = () => rej(new Error('Datenbank blockiert'));
-    });
-  },
-  tx(store, mode, fn) {
-    return new Promise((res, rej) => {
-      let out;
-      try {
-        const t = DB.db.transaction(store, mode);
-        out = fn(t.objectStore(store));
-        t.oncomplete = () => res(out && 'result' in out ? out.result : undefined);
-        t.onerror = () => rej(t.error);
-        t.onabort = () => rej(t.error);
-      } catch (e) { rej(e); }
-    });
-  },
-  getAll(store) { return DB.tx(store, 'readonly', s => s.getAll()); },
-  get(store, key) { return DB.tx(store, 'readonly', s => s.get(key)); },
-  put(store, val, key) { return DB.tx(store, 'readwrite', s => key === undefined ? s.put(val) : s.put(val, key)); },
-  del(store, key) { return DB.tx(store, 'readwrite', s => s.delete(key)); }
-};
-
-const STATUS = {
-  saved:   ['ok',   'Automatisch gespeichert – nur auf diesem Gerät'],
-  pending: ['warn', 'Änderungen werden gespeichert …'],
-  saving:  ['warn', 'Speichert …'],
-  error:   ['err',  'Speichern fehlgeschlagen – exportiere dein Profil als Backup'],
-  nodb:    ['err',  'Browser-Speicher nicht verfügbar – exportiere dein Profil, sonst geht es verloren']
-};
-function setStatus(kind) {
-  const el = $('#status');
-  el.className = 'status ' + STATUS[kind][0];
-  $('span', el).textContent = STATUS[kind][1];
-}
-
-const dirty = new Set();
-let metaDirty = false, saveTimer = null;
-function markDirty(profileId) {
-  if (profileId) dirty.add(profileId); else metaDirty = true;
-  if (!DB.db) { setStatus('nodb'); return; }
-  setStatus('pending');
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(flush, 500);
-}
-async function flush() {
-  clearTimeout(saveTimer);
-  if (!DB.db) { setStatus('nodb'); return; }
-  if (!dirty.size && !metaDirty) return;
-  setStatus('saving');
-  try {
-    const ids = Array.from(dirty); dirty.clear();
-    for (const id of ids) {
-      const p = S.profiles.find(x => x.id === id);
-      if (p) await DB.put('profiles', JSON.parse(JSON.stringify(p)));
-    }
-    if (metaDirty) {
-      metaDirty = false;
-      await DB.put('meta', { settings: S.settings, activeId: S.activeId, text: S.text }, 'state');
-    }
-    setStatus('saved');
-  } catch (e) {
-    console.error(e);
-    setStatus('error');
-  }
-}
-
-/* ============================================================
-   Strich-Geometrie (gemeinsam für Canvas und PDF)
-   ============================================================ */
-const pf = p => 0.72 + 0.56 * (p == null ? 0.5 : p);
-
-function walkStroke(pts, ox, oy, onDot, onSeg) {
-  const n = pts.length;
-  if (!n) return;
-  if (n === 1) { onDot(pts[0][0] + ox, pts[0][1] + oy, pts[0][2]); return; }
-  let px = pts[0][0] + ox, py = pts[0][1] + oy;
-  for (let i = 1; i < n; i++) {
-    const cx = pts[i][0] + ox, cy = pts[i][1] + oy;
-    let ex, ey;
-    if (i < n - 1) { ex = (cx + pts[i + 1][0] + ox) / 2; ey = (cy + pts[i + 1][1] + oy) / 2; }
-    else { ex = cx; ey = cy; }
-    const p0 = pts[i - 1][2], p1 = pts[i][2];
-    onSeg(px, py, cx, cy, ex, ey, ((p0 == null ? 0.5 : p0) + (p1 == null ? 0.5 : p1)) / 2);
-    px = ex; py = ey;
-  }
-}
-
-function paintStrokes(ctx, strokes, ox, oy, bw) {
-  for (const s of strokes) {
-    walkStroke(s, ox, oy,
-      (x, y, p) => { ctx.beginPath(); ctx.arc(x, y, bw * pf(p) / 2, 0, Math.PI * 2); ctx.fill(); },
-      (x0, y0, cx, cy, x1, y1, p) => {
-        ctx.lineWidth = bw * pf(p);
-        ctx.beginPath(); ctx.moveTo(x0, y0); ctx.quadraticCurveTo(cx, cy, x1, y1); ctx.stroke();
-      });
-  }
-}
-
-function simplify(pts, eps) {
-  if (pts.length < 3) return pts.slice();
-  const keep = new Uint8Array(pts.length);
-  keep[0] = keep[pts.length - 1] = 1;
-  const stack = [[0, pts.length - 1]];
-  while (stack.length) {
-    const [a, b] = stack.pop();
-    let max = 0, idx = -1;
-    const ax = pts[a][0], ay = pts[a][1], bx = pts[b][0], by = pts[b][1];
-    const dx = bx - ax, dy = by - ay, len = Math.hypot(dx, dy);
-    for (let i = a + 1; i < b; i++) {
-      const d = len < 1e-9 ? Math.hypot(pts[i][0] - ax, pts[i][1] - ay)
-        : Math.abs(dy * pts[i][0] - dx * pts[i][1] + bx * ay - by * ax) / len;
-      if (d > max) { max = d; idx = i; }
-    }
-    if (idx > 0 && max > eps) { keep[idx] = 1; stack.push([a, idx], [idx, b]); }
-  }
-  return pts.filter((_, i) => keep[i]);
-}
-function finalizeStroke(pts) {
-  return simplify(pts, 0.6).map(p => [Math.round(p[0] * 10) / 10, Math.round(p[1] * 10) / 10, Math.round(p[2] * 100) / 100]);
-}
-
-/* ============================================================
-   Farben
-   ============================================================ */
-function hex2rgb(h) {
-  const m = /^#?([0-9a-f]{6})$/i.exec(h || '');
-  const n = parseInt(m ? m[1] : 'ffffff', 16);
-  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
-}
-function lineColor(paper) {
-  const p = hex2rgb(paper), b = [70, 104, 160], a = 0.30;
-  return '#' + p.map((v, i) => Math.round(v * (1 - a) + b[i] * a).toString(16).padStart(2, '0')).join('');
-}
-
-/* ============================================================
-   Text-Layout: Zeichen -> Position auf Seiten
-   ============================================================ */
-function rng(seed) {
-  let a = seed >>> 0;
-  return function () {
-    a = (a + 0x6D2B79F5) >>> 0;
-    let t = a;
-    t = Math.imul(t ^ (t >>> 15), t | 1);
-    t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-  };
-}
-const seedMix = (seed, i) => (Math.imul(seed + 1, 0x9E3779B1) ^ Math.imul(i + 1, 0x85EBCA6B)) >>> 0;
-
-const bboxCache = new WeakMap();
-function vbox(v) {
-  let b = bboxCache.get(v);
-  if (b) return b;
-  let minX = Infinity, maxX = -Infinity;
-  for (const s of v.strokes) for (const p of s) { if (p[0] < minX) minX = p[0]; if (p[0] > maxX) maxX = p[0]; }
-  if (!isFinite(minX)) { minX = 0; maxX = 0; }
-  const pad = 3.5;                       // halbe Strichstärke
-  b = { minX: minX - pad, w: Math.max(maxX - minX, 0) + pad * 2 };
-  bboxCache.set(v, b);
-  return b;
-}
-
-function candidates(ch) {
-  const out = [ch];
-  const a = ALIAS[ch];
-  if (a) { out.push(a); if (a === '–') out.push('-'); }
-  if (ch === '–') out.push('-');
-  return out;
-}
-function normText(t) {
-  return String(t).replace(/\r\n?/g, '\n').replace(/…/g, '...');
-}
-
-function computeLayout(profile, text, st) {
-  const dims = PAGES[st.format] || PAGES.a4p;
-  const pw = dims.w, ph = dims.h;
-  const sc0 = K100 * st.size / 100;
-  const pitch = BASE_PITCH * st.lineH / 100;
-  const y0 = MARGIN.t + pitch;
-  const rowsPerPage = Math.max(1, Math.floor((ph - MARGIN.b - y0) / pitch) + 1);
-  const maxX = pw - MARGIN.r;
-  const availW = maxX - MARGIN.l;
-  const mess = st.mess / 100;
-  const gapU = 16 * st.letterSp / 100;
-  const spaceU = { small: 40, normal: 60, large: 90 }[st.wordSp] || 60;
-  const glyphs = profile.glyphs;
-  const missing = new Set(), untrainable = new Set();
-  const lastPick = {};
-  const placed = [];
-  let maxRow = 0;
-  let idx = 0, row = 0, x = MARGIN.l, first = true;
-
-  function makeItem(ch, i) {
-    const r = rng(seedMix(st.seed, i));
-    const rp = r();
-    const j = () => (r() - 0.5) * 2;
-    const cands = candidates(ch);
-    const key = cands.find(c => glyphs[c] && glyphs[c].variants && glyphs[c].variants.length);
-    if (!key) {
-      const can = cands.find(c => ALL_CHARS.indexOf(c) >= 0);
-      if (can) missing.add(can); else untrainable.add(ch);
-      return { blank: true, w: 40 * sc0, gap: gapU * sc0 };
-    }
-    const vs = glyphs[key].variants;
-    let pick = Math.floor(rp * vs.length);
-    if (vs.length > 1 && lastPick[key] !== undefined) pick = (lastPick[key] + 1 + Math.floor(rp * (vs.length - 1))) % vs.length;
-    lastPick[key] = pick;
-    const v = vs[pick], b = vbox(v);
-    const sc = sc0 * (1 + j() * mess * 0.06);
-    const dy = j() * mess * 2.2 * (sc0 / K100);
-    const rot = j() * mess * 0.05;
-    const gapJ = 1 + j() * mess * 0.6;
-    return { v, b, sc, dy, rot, w: b.w * sc, gap: Math.max(0, gapU * sc0 * gapJ) };
-  }
-  function wordWidth(items) {
-    let w = 0;
-    for (const it of items) w += it.w + it.gap;
-    return items.length ? w - items[items.length - 1].gap : 0;
-  }
-  function splitWord(items) {
-    const out = []; let cur = [], wx = 0;
-    for (const it of items) {
-      if (cur.length && wx + it.w > availW) { out.push(cur); cur = []; wx = 0; }
-      cur.push(it); wx += it.w + it.gap;
-    }
-    if (cur.length) out.push(cur);
-    return out;
-  }
-  function place(items, px, rw, wdy) {
-    const page = Math.floor(rw / rowsPerPage);
-    const base = y0 + (rw % rowsPerPage) * pitch;
-    let wx = 0;
-    for (const it of items) {
-      if (!it.blank) placed.push({ page, v: it.v, b: it.b, sc: it.sc, cx: px + wx + it.w / 2, y: base + it.dy + wdy, rot: it.rot, w: it.w });
-      wx += it.w + it.gap;
-    }
-    if (rw > maxRow) maxRow = rw;
-  }
-
-  for (const para of text.split('\n')) {
-    const words = [];
-    let cur = null;
-    for (const ch of Array.from(para)) {
-      const i = idx++;
-      if (/\s/.test(ch)) { cur = null; continue; }
-      if (!cur) { cur = { items: [], i0: i }; words.push(cur); }
-      cur.items.push(makeItem(ch, i));
-    }
-    for (const w of words) {
-      const rw = rng(seedMix(st.seed, w.i0 + 77777));
-      const sp = spaceU * sc0 * (1 + (rw() - 0.5) * mess * 0.5);
-      const wdy = (rw() - 0.5) * 2 * mess * 1.6 * (sc0 / K100);
-      const width = wordWidth(w.items);
-      const pieces = width > availW ? splitWord(w.items) : [w.items];
-      pieces.forEach((pc, pi) => {
-        const pwid = wordWidth(pc);
-        if (!first) {
-          if (x + sp + pwid > maxX) { row++; x = MARGIN.l; first = true; }
-          else x += sp;
-        }
-        place(pc, x, row, wdy);
-        x += pwid; first = false;
-        if (pi < pieces.length - 1) { row++; x = MARGIN.l; first = true; }
-      });
-    }
-    row++; x = MARGIN.l; first = true;
-  }
-
-  return {
-    pw, ph, pitch, y0, rowsPerPage, placed, sc0,
-    pageCount: Math.max(1, Math.floor(maxRow / rowsPerPage) + 1),
-    missing: Array.from(missing), untrainable: Array.from(untrainable)
-  };
-}
-
-function rulingSegs(L, st) {
-  const segs = [];
-  const { pw, ph, pitch, y0 } = L;
-  if (st.ruling === 'lined') {
-    for (let n = -Math.floor((y0 - 24) / pitch); ; n++) {
-      const y = y0 + n * pitch;
-      if (y > ph - 24) break;
-      segs.push([0, y, pw, y]);
-    }
-  } else if (st.ruling === 'grid') {
-    const g = pitch / 2;
-    for (let n = -Math.floor((y0 - 8) / g); ; n++) {
-      const y = y0 + n * g;
-      if (y > ph - 8) break;
-      segs.push([0, y, pw, y]);
-    }
-    for (let n = -Math.floor((MARGIN.l - 8) / g); ; n++) {
-      const x = MARGIN.l + n * g;
-      if (x > pw - 8) break;
-      segs.push([x, 0, x, ph]);
-    }
-  }
-  return segs;
-}
-
-/* ============================================================
-   Seite zeichnen (Vorschau + PNG)
-   ============================================================ */
-function drawPage(ctx, scale, L, st, pageIdx) {
-  ctx.setTransform(scale, 0, 0, scale, 0, 0);
-  ctx.fillStyle = st.paper;
-  ctx.fillRect(0, 0, L.pw, L.ph);
-  const segs = rulingSegs(L, st);
-  if (segs.length) {
-    ctx.strokeStyle = lineColor(st.paper);
-    ctx.lineWidth = 0.8; ctx.lineCap = 'butt';
-    ctx.beginPath();
-    for (const s of segs) { ctx.moveTo(s[0], s[1]); ctx.lineTo(s[2], s[3]); }
-    ctx.stroke();
-  }
-  ctx.strokeStyle = st.ink; ctx.fillStyle = st.ink;
-  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-  const bw = BASE_STROKE * st.strokeW / 100;
-  for (const it of L.placed) {
-    if (it.page !== pageIdx) continue;
-    ctx.save();
-    ctx.translate(it.cx, it.y);
-    ctx.rotate(it.rot);
-    ctx.scale(it.sc, it.sc);
-    paintStrokes(ctx, it.v.strokes, -(it.b.minX + it.b.w / 2), -G.B, bw);
-    ctx.restore();
-  }
-}
-
-/* ============================================================
-   Vorschau
-   ============================================================ */
-let pvTimer = null, lastPvWidth = 0;
-function schedulePreview() {
-  clearTimeout(pvTimer);
-  pvTimer = setTimeout(renderPreview, 160);
-}
-function renderPreview() {
-  if ($('#viewWrite').hidden) return;
-  const prof = activeProfile();
-  if (!prof) return;
-  const st = S.settings;
-  const text = normText(S.text);
-  const empty = !text.trim();
-  const L = computeLayout(prof, empty ? 'Dein Text erscheint hier...' : text, st);
-
-  // Hinweise
-  const nb = $('#notice');
-  nb.innerHTML = '';
-  const total = glyphCount(prof);
-  const parts = [];
-  if (total === 0) {
-    parts.push({ t: 'Dein Handschriftprofil ist noch leer. Nimm zuerst deine Zeichen auf, dann erscheint hier dein Text in deiner Handschrift.', btn: 'Handschrift aufnehmen', ch: 'a' });
-  } else if (!empty) {
-    if (L.missing.length) {
-      parts.push({ t: 'In deinem Profil fehlen diese Zeichen: ' + L.missing.join(' ') + '. Sie werden im Text ausgelassen, bis du sie aufgenommen hast.', btn: 'Jetzt nachtrainieren', ch: L.missing[0] });
-    }
-    if (L.untrainable.length) {
-      parts.push({ t: 'Nicht unterstützte Zeichen (werden ausgelassen): ' + L.untrainable.join(' ') });
-    }
-  }
-  if (parts.length) {
-    for (const p of parts) {
-      const d = document.createElement('p');
-      d.textContent = p.t;
-      nb.appendChild(d);
-      if (p.btn) {
-        const b = document.createElement('button');
-        b.type = 'button'; b.className = 'btn soft small'; b.textContent = p.btn;
-        b.onclick = () => openTrainFor(p.ch);
-        nb.appendChild(b);
-      }
-    }
-    nb.className = 'note'; nb.hidden = false;
-  } else { nb.hidden = true; nb.className = ''; }
-
-  // Seiten
-  const host = $('#pages');
-  const cssW = host.clientWidth || 600;
-  lastPvWidth = cssW;
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
-  const scale = cssW * (L.pageCount > 8 ? 1 : dpr) / L.pw;
-  while (host.children.length > L.pageCount) host.lastChild.remove();
-  while (host.children.length < L.pageCount) {
-    const fig = document.createElement('figure');
-    fig.className = 'pg';
-    fig.appendChild(document.createElement('canvas'));
-    fig.appendChild(document.createElement('figcaption'));
-    host.appendChild(fig);
-  }
-  for (let i = 0; i < L.pageCount; i++) {
-    const fig = host.children[i];
-    const cv = $('canvas', fig);
-    cv.width = Math.round(L.pw * scale);
-    cv.height = Math.round(L.ph * scale);
-    drawPage(cv.getContext('2d'), cv.width / L.pw, L, st, i);
-    $('figcaption', fig).textContent = 'Seite ' + (i + 1) + ' von ' + L.pageCount;
-  }
-}
-
-/* ============================================================
-   Export: Download-Helfer
-   ============================================================ */
-function download(blob, name) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = name;
-  document.body.appendChild(a); a.click(); a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 5 * 60 * 1000);
-  return url;
-}
-function safeName(s) {
-  return (String(s).replace(/[^\w\-äöüÄÖÜß ]+/g, '').trim().replace(/\s+/g, '-') || 'sunwrite').slice(0, 40);
-}
-function exportPrecheck() {
-  if (busy) return null;
-  const prof = activeProfile();
-  const text = normText(S.text);
-  if (!text.trim()) { toast('Gib zuerst einen Text ein.'); return null; }
-  if (glyphCount(prof) === 0) { toast('Dein Profil ist noch leer. Nimm zuerst Zeichen auf.'); return null; }
-  const L = computeLayout(prof, text, S.settings);
-  if (L.missing.length || L.untrainable.length) {
-    const list = L.missing.concat(L.untrainable).join(' ');
-    if (!confirm('Diese Zeichen fehlen und werden ausgelassen: ' + list + '\n\nTrotzdem exportieren?')) return null;
-  }
-  return L;
-}
-
-/* ============================================================
-   Export: PNG
-   ============================================================ */
-async function exportPNG() {
-  const L = exportPrecheck();
-  if (!L) return;
-  busy = true; setBusy(true);
-  try {
-    let S_ = 3;
-    for (let i = 0; i < L.pageCount; i++) {
-      let blob = null;
-      for (let attempt = 0; attempt < 2 && !blob; attempt++) {
-        try {
-          const cv = document.createElement('canvas');
-          cv.width = Math.round(L.pw * S_); cv.height = Math.round(L.ph * S_);
-          drawPage(cv.getContext('2d'), cv.width / L.pw, L, S.settings, i);
-          blob = await new Promise(r => cv.toBlob(r, 'image/png'));
-          cv.width = cv.height = 1;
-        } catch (e) { blob = null; }
-        if (!blob) S_ = 2;
-      }
-      if (!blob) throw new Error('Bild konnte nicht erzeugt werden');
-      toast('Bild ' + (i + 1) + ' von ' + L.pageCount + ' wird geladen …');
-      const url = download(blob, 'sunwrite-' + safeName(activeProfile().name) + '-seite-' + (i + 1) + '.png');
-      if (i === L.pageCount - 1) {
-        toast(L.pageCount > 1 ? L.pageCount + ' Bilder erstellt. Erlaube ggf. mehrere Downloads.' : 'Bild erstellt.',
-          { href: url, text: 'Falls nichts passiert: hier öffnen' });
-      } else await sleep(700);
-    }
-  } catch (e) {
-    console.error(e);
-    toast('Bild-Export fehlgeschlagen: ' + e.message);
-  } finally { busy = false; setBusy(false); }
-}
-
-/* ============================================================
-   Export: PDF (eigener Vektor-PDF-Writer, keine Bibliothek)
-   ============================================================ */
-const f2 = n => (Math.round(n * 100) / 100).toString();
-
-function pdfPageStream(L, st, pageIdx, pdfW, pdfH) {
-  const sx = pdfW / L.pw, sy = pdfH / L.ph;
-  const col = h => hex2rgb(h).map(v => (v / 255).toFixed(4)).join(' ');
-  const out = [];
-  out.push(col(st.paper) + ' rg 0 0 ' + f2(pdfW) + ' ' + f2(pdfH) + ' re f');
-  const segs = rulingSegs(L, st);
-  if (segs.length) {
-    out.push(col(lineColor(st.paper)) + ' RG ' + f2(0.8 * sx) + ' w 0 J');
-    for (const s of segs) out.push(f2(s[0] * sx) + ' ' + f2(pdfH - s[1] * sy) + ' m ' + f2(s[2] * sx) + ' ' + f2(pdfH - s[3] * sy) + ' l S');
-  }
-  out.push(col(st.ink) + ' RG ' + col(st.ink) + ' rg 1 J 1 j');
-  const bw = BASE_STROKE * st.strokeW / 100;
-  for (const it of L.placed) {
-    if (it.page !== pageIdx) continue;
-    const c = Math.cos(it.rot), s = Math.sin(it.rot), sc = it.sc;
-    const ox = -(it.b.minX + it.b.w / 2), oy = -G.B;
-    const X = (u, v) => (it.cx + sc * (u * c - v * s)) * sx;
-    const Y = (u, v) => pdfH - (it.y + sc * (u * s + v * c)) * sy;
-    for (const stroke of it.v.strokes) {
-      walkStroke(stroke, ox, oy,
-        (x, y, p) => {
-          const cx = X(x, y), cy = Y(x, y), r = bw * pf(p) / 2 * sc * sx, k = 0.5523 * r;
-          out.push(f2(cx + r) + ' ' + f2(cy) + ' m ' +
-            f2(cx + r) + ' ' + f2(cy + k) + ' ' + f2(cx + k) + ' ' + f2(cy + r) + ' ' + f2(cx) + ' ' + f2(cy + r) + ' c ' +
-            f2(cx - k) + ' ' + f2(cy + r) + ' ' + f2(cx - r) + ' ' + f2(cy + k) + ' ' + f2(cx - r) + ' ' + f2(cy) + ' c ' +
-            f2(cx - r) + ' ' + f2(cy - k) + ' ' + f2(cx - k) + ' ' + f2(cy - r) + ' ' + f2(cx) + ' ' + f2(cy - r) + ' c ' +
-            f2(cx + k) + ' ' + f2(cy - r) + ' ' + f2(cx + r) + ' ' + f2(cy - k) + ' ' + f2(cx + r) + ' ' + f2(cy) + ' c f');
-        },
-        (x0, y0, cx, cy, x1, y1, p) => {
-          const ax = X(x0, y0), ay = Y(x0, y0), qx = X(cx, cy), qy = Y(cx, cy), bx = X(x1, y1), by = Y(x1, y1);
-          const c1x = ax + 2 / 3 * (qx - ax), c1y = ay + 2 / 3 * (qy - ay);
-          const c2x = bx + 2 / 3 * (qx - bx), c2y = by + 2 / 3 * (qy - by);
-          out.push(f2(bw * pf(p) * sc * sx) + ' w ' + f2(ax) + ' ' + f2(ay) + ' m ' +
-            f2(c1x) + ' ' + f2(c1y) + ' ' + f2(c2x) + ' ' + f2(c2y) + ' ' + f2(bx) + ' ' + f2(by) + ' c S');
-        });
-    }
-  }
-  return out.join('\n');
-}
-
-async function deflate(bytes) {
-  if (typeof CompressionStream === 'undefined') return null;
-  try {
-    const cs = new CompressionStream('deflate');
-    const w = cs.writable.getWriter();
-    w.write(bytes); w.close();
-    return new Uint8Array(await new Response(cs.readable).arrayBuffer());
-  } catch (e) { return null; }
-}
-
-async function buildPDF(L, st, onProgress) {
-  const landscape = L.pw > L.ph;
-  const pdfW = landscape ? 841.89 : 595.28, pdfH = landscape ? 595.28 : 841.89;
-  const enc = new TextEncoder();
-  const chunks = [], offsets = [];
-  let pos = 0;
-  const push = d => { const b = typeof d === 'string' ? enc.encode(d) : d; chunks.push(b); pos += b.length; };
-  const n = L.pageCount;
-  push('%PDF-1.4\n%\u00e2\u00e3\u00cf\u00d3\n');
-  offsets[1] = pos; push('1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n');
-  const kids = [];
-  for (let i = 0; i < n; i++) kids.push((3 + 2 * i) + ' 0 R');
-  offsets[2] = pos; push('2 0 obj\n<< /Type /Pages /Kids [' + kids.join(' ') + '] /Count ' + n + ' >>\nendobj\n');
-  for (let i = 0; i < n; i++) {
-    if (onProgress) onProgress(i + 1, n);
-    await sleep(0);
-    const pid = 3 + 2 * i, cid = 4 + 2 * i;
-    offsets[pid] = pos;
-    push(pid + ' 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ' + pdfW.toFixed(2) + ' ' + pdfH.toFixed(2) + '] /Contents ' + cid + ' 0 R /Resources << >> >>\nendobj\n');
-    const raw = enc.encode(pdfPageStream(L, st, i, pdfW, pdfH));
-    const z = await deflate(raw);
-    const data = z || raw;
-    offsets[cid] = pos;
-    push(cid + ' 0 obj\n<< /Length ' + data.length + (z ? ' /Filter /FlateDecode' : '') + ' >>\nstream\n');
-    push(data);
-    push('\nendstream\nendobj\n');
-  }
-  const total = 3 + 2 * n;
-  const xrefPos = pos;
-  let x = 'xref\n0 ' + total + '\n0000000000 65535 f \n';
-  for (let id = 1; id < total; id++) x += String(offsets[id]).padStart(10, '0') + ' 00000 n \n';
-  x += 'trailer\n<< /Size ' + total + ' /Root 1 0 R >>\nstartxref\n' + xrefPos + '\n%%EOF\n';
-  push(x);
-  return new Blob(chunks, { type: 'application/pdf' });
-}
-
-async function exportPDF() {
-  const L = exportPrecheck();
-  if (!L) return;
-  busy = true; setBusy(true);
-  try {
-    const blob = await buildPDF(L, S.settings, (i, n) => toast('PDF wird erstellt … Seite ' + i + ' von ' + n));
-    const url = download(blob, 'sunwrite-' + safeName(activeProfile().name) + '.pdf');
-    toast('PDF erstellt (' + L.pageCount + (L.pageCount === 1 ? ' Seite' : ' Seiten') + ').', { href: url, text: 'Falls nichts passiert: hier öffnen' });
-  } catch (e) {
-    console.error(e);
-    toast('PDF-Export fehlgeschlagen: ' + e.message);
-  } finally { busy = false; setBusy(false); }
-}
-function setBusy(b) { $('#expPdf').disabled = b; $('#expPng').disabled = b; }
-
-/* ============================================================
-   Profile verwalten
-   ============================================================ */
-function newProfile(name) {
-  return { id: 'p' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), name: name, created: Date.now(), updated: Date.now(), glyphs: {} };
-}
-function fillProfileSelects() {
-  for (const id of ['profSelW', 'profSelT']) {
-    const sel = $('#' + id);
-    sel.innerHTML = '';
-    for (const p of S.profiles) {
-      const o = document.createElement('option');
-      o.value = p.id;
-      o.textContent = p.name + '  (' + glyphCount(p) + '/' + ALL_CHARS.length + ')';
-      if (p.id === S.activeId) o.selected = true;
-      sel.appendChild(o);
-    }
-  }
-}
-function switchProfile(id) {
-  S.activeId = id;
-  T.draft = []; T.active = null;
-  markDirty();
-  fillProfileSelects(); renderTrain(); schedulePreview();
-}
-function profNew() {
-  const name = prompt('Name des neuen Handschriftprofils:', 'Handschrift ' + (S.profiles.length + 1));
-  if (!name || !name.trim()) return;
-  const p = newProfile(name.trim().slice(0, 40));
-  S.profiles.push(p);
-  markDirty(p.id);
-  switchProfile(p.id);
-}
-function profRename() {
-  const p = activeProfile();
-  const name = prompt('Neuer Name:', p.name);
-  if (!name || !name.trim()) return;
-  p.name = name.trim().slice(0, 40); p.updated = Date.now();
-  markDirty(p.id); fillProfileSelects();
-}
-async function profDelete() {
-  const p = activeProfile();
-  if (!confirm('Profil „' + p.name + '“ wirklich löschen? Das kann nicht rückgängig gemacht werden.')) return;
-  S.profiles = S.profiles.filter(x => x.id !== p.id);
-  dirty.delete(p.id);
-  if (DB.db) { try { await DB.del('profiles', p.id); } catch (e) { console.error(e); } }
-  if (!S.profiles.length) { const np = newProfile('Meine Handschrift'); S.profiles.push(np); markDirty(np.id); }
-  switchProfile(S.profiles[0].id);
-}
-function profExport() {
-  const p = activeProfile();
-  if (glyphCount(p) === 0) { toast('Dieses Profil ist noch leer.'); return; }
-  const data = { format: 'sunwrite-profile', version: 1, name: p.name, exported: new Date().toISOString(), glyphs: p.glyphs };
-  const url = download(new Blob([JSON.stringify(data)], { type: 'application/json' }), 'sunwrite-profil-' + safeName(p.name) + '.json');
-  toast('Profil exportiert.', { href: url, text: 'Falls nichts passiert: hier öffnen' });
-}
-function sanitizeGlyphs(g) {
-  const out = {};
-  if (!g || typeof g !== 'object') return out;
-  for (const k of Object.keys(g)) {
-    if (Array.from(k).length !== 1) continue;
-    const vs = g[k] && Array.isArray(g[k].variants) ? g[k].variants : [];
-    const cv = [];
-    for (const v of vs.slice(0, MAX_VARIANTS)) {
-      const strokes = [];
-      const ss = v && Array.isArray(v.strokes) ? v.strokes : [];
-      for (const s of ss.slice(0, 60)) {
-        const pts = [];
-        for (const p of (Array.isArray(s) ? s : []).slice(0, 3000)) {
-          if (Array.isArray(p) && Number.isFinite(p[0]) && Number.isFinite(p[1])) {
-            pts.push([clamp(p[0], -60, G.W + 60), clamp(p[1], -120, G.H + 120), Number.isFinite(p[2]) ? clamp(p[2], 0, 1) : 0.5]);
-          }
-        }
-        if (pts.length) strokes.push(pts);
-      }
-      if (strokes.length) cv.push({ strokes });
-    }
-    if (cv.length) out[k] = { variants: cv };
-  }
-  return out;
-}
-function profImport(file) {
-  const rd = new FileReader();
-  rd.onload = () => {
-    try {
-      const d = JSON.parse(String(rd.result));
-      if (!d || d.format !== 'sunwrite-profile' || d.version !== 1) throw new Error('Keine SunWrite-Profildatei.');
-      const glyphs = sanitizeGlyphs(d.glyphs);
-      if (!Object.keys(glyphs).length) throw new Error('Die Datei enthält keine Zeichen.');
-      const p = newProfile(String(d.name || 'Importiert').slice(0, 34) + ' (Import)');
-      p.glyphs = glyphs;
-      S.profiles.push(p);
-      markDirty(p.id);
-      switchProfile(p.id);
-      toast('Profil importiert: ' + Object.keys(glyphs).length + ' Zeichen.');
-    } catch (e) { toast('Import fehlgeschlagen: ' + e.message); }
-  };
-  rd.onerror = () => toast('Datei konnte nicht gelesen werden.');
-  rd.readAsText(file);
-}
-
-/* ============================================================
-   Training
-   ============================================================ */
-function renderTrain() {
-  const prof = activeProfile();
-  if (!prof) return;
-  const g = prof.glyphs;
-  const has = c => g[c] && g[c].variants && g[c].variants.length;
-  const done = ALL_CHARS.filter(has).length;
-  $('#progTxt').textContent = done + ' von ' + ALL_CHARS.length + ' Zeichen';
-  $('#progBar').style.width = (done / ALL_CHARS.length * 100) + '%';
-
-  $$('#catSeg button').forEach(b => {
-    const c = b.dataset.cat, list = CATS[c].chars;
-    b.classList.toggle('on', c === T.cat);
-    $('small', b).textContent = list.filter(has).length + '/' + list.length;
-  });
-
-  const box = $('#chars');
-  box.innerHTML = '';
-  for (const c of CATS[T.cat].chars) {
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.className = 'ch' + (has(c) ? ' done' : '') + (c === T.ch ? ' cur' : '');
-    b.textContent = c;
-    b.setAttribute('aria-label', 'Zeichen ' + c);
-    const n = has(c) ? g[c].variants.length : 0;
-    if (n > 1) { const i = document.createElement('i'); i.textContent = n; b.appendChild(i); }
-    b.onclick = () => setChar(c);
-    box.appendChild(b);
-  }
-
-  $('#curChar').textContent = T.ch;
-  const n = has(T.ch) ? g[T.ch].variants.length : 0;
-  $('#curInfo').textContent = n ? n + ' von ' + MAX_VARIANTS + ' Varianten gespeichert' : 'Noch nicht aufgenommen – schreibe es in das Feld';
-
-  const vars = $('#vars');
-  vars.innerHTML = '';
-  if (!n) {
-    const p = document.createElement('span'); p.className = 'muted'; p.style.fontSize = '17px';
-    p.textContent = 'Noch keine Variante für dieses Zeichen.';
-    vars.appendChild(p);
-  } else {
-    g[T.ch].variants.forEach((v, i) => {
-      const d = document.createElement('div'); d.className = 'vt';
-      const cv = document.createElement('canvas'); cv.width = cv.height = 156;
-      const ctx = cv.getContext('2d');
-      ctx.fillStyle = '#f6f7f9'; ctx.fillRect(0, 0, 156, 156);
-      ctx.setTransform(156 / G.W, 0, 0, 156 / G.H, 0, 0);
-      ctx.fillStyle = ctx.strokeStyle = '#14161c'; ctx.lineCap = ctx.lineJoin = 'round';
-      paintStrokes(ctx, v.strokes, 0, 0, BASE_STROKE);
-      const del = document.createElement('button'); del.type = 'button'; del.textContent = '×';
-      del.setAttribute('aria-label', 'Variante ' + (i + 1) + ' löschen');
-      del.onclick = () => deleteVariant(T.ch, i);
-      d.appendChild(cv); d.appendChild(del); vars.appendChild(d);
-    });
-  }
-  $('#tDelAll').hidden = !n;
-  redrawTrain();
-}
-
-function setChar(ch) {
-  T.ch = ch; T.cat = catOf(ch); T.draft = []; T.active = null;
-  renderTrain();
-}
-function openTrainFor(ch) {
-  showView('train');
-  setChar(ch);
-}
-function stepChar(dir) {
-  const i = ALL_CHARS.indexOf(T.ch);
-  setChar(ALL_CHARS[(i + dir + ALL_CHARS.length) % ALL_CHARS.length]);
-}
-function nextMissingAfter(ch) {
-  const g = activeProfile().glyphs;
-  const i = ALL_CHARS.indexOf(ch);
-  for (let k = 1; k <= ALL_CHARS.length; k++) {
-    const c = ALL_CHARS[(i + k) % ALL_CHARS.length];
-    if (!(g[c] && g[c].variants && g[c].variants.length)) return c;
-  }
-  return null;
-}
-
-function saveDraft() {
-  if (!T.draft.length) { toast('Schreibe das Zeichen zuerst in das Feld.'); return; }
-  const prof = activeProfile();
-  if (!prof.glyphs[T.ch]) prof.glyphs[T.ch] = { variants: [] };
-  const g = prof.glyphs[T.ch];
-  if (g.variants.length >= MAX_VARIANTS) { toast('Maximal ' + MAX_VARIANTS + ' Varianten. Lösche zuerst eine, um neu aufzunehmen.'); return; }
-  const first = g.variants.length === 0;
-  g.variants.push({ strokes: T.draft.map(finalizeStroke) });
-  prof.updated = Date.now();
-  markDirty(prof.id);
-  T.draft = []; T.active = null;
-  if (S.settings.auto && first) {
-    const nx = nextMissingAfter(T.ch);
-    if (nx) { T.ch = nx; T.cat = catOf(nx); } else toast('Alle Zeichen aufgenommen ✓');
-  }
-  fillProfileSelects(); renderTrain(); schedulePreview();
-}
-function deleteVariant(ch, i) {
-  const prof = activeProfile();
-  const g = prof.glyphs[ch];
-  if (!g) return;
-  g.variants.splice(i, 1);
-  if (!g.variants.length) delete prof.glyphs[ch];
-  prof.updated = Date.now(); markDirty(prof.id);
-  fillProfileSelects(); renderTrain(); schedulePreview();
-}
-function deleteAllVariants() {
-  const prof = activeProfile();
-  if (!prof.glyphs[T.ch]) return;
-  if (!confirm('Alle Varianten von „' + T.ch + '“ löschen?')) return;
-  delete prof.glyphs[T.ch];
-  prof.updated = Date.now(); markDirty(prof.id);
-  fillProfileSelects(); renderTrain(); schedulePreview();
-}
-
-/* --- Schreibfläche --- */
-const tcv = $('#tcv');
-function resizeTrainCanvas() {
-  const w = tcv.getBoundingClientRect().width;
-  if (!w) return false;
-  const px = Math.round(w * Math.min(window.devicePixelRatio || 1, 3));
-  if (tcv.width !== px) { tcv.width = px; tcv.height = px; }
-  return true;
-}
-function redrawTrain() {
-  if ($('#viewTrain').hidden) return;
-  const ctx = tcv.getContext('2d');
-  const sc = tcv.width / G.W;
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.fillStyle = '#f6f7f9'; ctx.fillRect(0, 0, tcv.width, tcv.height);
-  ctx.setTransform(sc, 0, 0, sc, 0, 0);
-  // Hilfslinien
-  ctx.lineWidth = 1.2; ctx.strokeStyle = 'rgba(10,132,255,.40)'; ctx.setLineDash([6, 6]);
-  for (const y of [G.B - G.CAP, G.B - G.XH, G.B + G.DESC]) { ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(G.W, y); ctx.stroke(); }
-  ctx.setLineDash([]); ctx.lineWidth = 2; ctx.strokeStyle = 'rgba(10,132,255,.75)';
-  ctx.beginPath(); ctx.moveTo(0, G.B); ctx.lineTo(G.W, G.B); ctx.stroke();
-  // Vorlage
-  if (S.settings.showRef) {
-    const lower = CATS.lower.chars.indexOf(T.ch) >= 0;
-    ctx.fillStyle = '#d3dae8'; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-    ctx.font = (lower ? 170 : 222) + 'px "Helvetica Neue",Arial,Roboto,sans-serif';
-    ctx.fillText(T.ch, G.W / 2, G.B);
-  }
-  // Striche
-  ctx.fillStyle = ctx.strokeStyle = '#14161c'; ctx.lineCap = ctx.lineJoin = 'round';
-  paintStrokes(ctx, T.draft, 0, 0, BASE_STROKE);
-}
-
-function addPoint(e, stroke) {
-  const r = tcv.getBoundingClientRect();
-  const x = clamp((e.clientX - r.left) * G.W / r.width, 0, G.W);
-  const y = clamp((e.clientY - r.top) * G.H / r.height, 0, G.H);
-  let p = 0.5;
-  if (e.pointerType === 'pen' && e.pressure > 0) p = e.pressure;
-  const last = stroke[stroke.length - 1];
-  if (last) {
-    if (Math.hypot(x - last[0], y - last[1]) < 1.2) return;
-    p = last[2] + (p - last[2]) * 0.4;       // Druck glätten
-  }
-  stroke.push([x, y, p]);
-}
-tcv.addEventListener('pointerdown', e => {
-  if (e.pointerType === 'pen') T.lastPen = Date.now();
-  if (S.settings.penOnly && e.pointerType !== 'pen') return;
-  if (e.pointerType === 'touch' && Date.now() - T.lastPen < 1500) return;   // Handballen
-  if (T.active) return;
-  e.preventDefault();
-  try { tcv.setPointerCapture(e.pointerId); } catch (_) {}
-  const stroke = [];
-  T.active = { id: e.pointerId, stroke };
-  T.draft.push(stroke);
-  addPoint(e, stroke);
-  redrawTrain();
-});
-tcv.addEventListener('pointermove', e => {
-  if (!T.active || e.pointerId !== T.active.id) return;
-  e.preventDefault();
-  const evs = e.getCoalescedEvents ? e.getCoalescedEvents() : null;
-  if (evs && evs.length) for (const ev of evs) addPoint(ev, T.active.stroke); else addPoint(e, T.active.stroke);
-  redrawTrain();
-});
-function endStroke(e) {
-  if (!T.active || e.pointerId !== T.active.id) return;
-  if (e.type === 'pointerup') addPoint(e, T.active.stroke);
-  if (!T.active.stroke.length) T.draft.pop();
-  T.active = null;
-  redrawTrain();
-}
-tcv.addEventListener('pointerup', endStroke);
-tcv.addEventListener('pointercancel', endStroke);
-tcv.addEventListener('contextmenu', e => e.preventDefault());
-tcv.addEventListener('touchstart', e => e.preventDefault(), { passive: false });
-tcv.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
-
-/* ============================================================
-   UI-Bindung
-   ============================================================ */
-function showView(v) {
-  const w = v === 'write';
-  $('#viewWrite').hidden = !w;
-  $('#viewTrain').hidden = w;
-  $('#tabWrite').classList.toggle('on', w);
-  $('#tabTrain').classList.toggle('on', !w);
-  window.scrollTo(0, 0);
-  if (w) { fillProfileSelects(); renderPreview(); }
-  else { resizeTrainCanvas(); renderTrain(); }
-}
-
-const RANGES = { size: v => v + ' %', lineH: v => v + ' %', letterSp: v => v + ' %', strokeW: v => v + ' %', mess: v => v + ' %' };
-
-function syncUI() {
-  const st = S.settings;
-  $('#text').value = S.text;
-  $('#count').textContent = S.text.length + ' / ' + MAX_TEXT;
-  for (const k of Object.keys(RANGES)) { $('#s_' + k).value = st[k]; $('#v_' + k).textContent = RANGES[k](st[k]); }
-  for (const k of ['wordSp', 'ruling', 'format']) $('#s_' + k).value = st[k];
-  for (const k of ['ink', 'paper']) {
-    $('#s_' + k).value = st[k];
-    $('#d_' + k).style.background = st[k];
-    $('#h_' + k).textContent = st[k].toUpperCase();
-  }
-  for (const k of ['showRef', 'auto', 'penOnly']) $('#s_' + k).checked = !!st[k];
-}
-
-function bindUI() {
-  $('#tabWrite').onclick = () => showView('write');
-  $('#tabTrain').onclick = () => showView('train');
-
-  $('#text').addEventListener('input', e => {
-    S.text = e.target.value.slice(0, MAX_TEXT);
-    $('#count').textContent = S.text.length + ' / ' + MAX_TEXT;
-    markDirty(); schedulePreview();
-  });
-
-  for (const k of Object.keys(RANGES)) {
-    $('#s_' + k).addEventListener('input', e => {
-      const v = Number(e.target.value);
-      S.settings[k] = v;
-      $('#v_' + k).textContent = RANGES[k](v);
-      markDirty(); schedulePreview();
-    });
-  }
-  for (const k of ['wordSp', 'ruling', 'format']) {
-    $('#s_' + k).addEventListener('change', e => { S.settings[k] = e.target.value; markDirty(); schedulePreview(); });
-  }
-  for (const k of ['ink', 'paper']) {
-    $('#s_' + k).addEventListener('input', e => {
-      S.settings[k] = e.target.value;
-      $('#d_' + k).style.background = e.target.value;
-      $('#h_' + k).textContent = e.target.value.toUpperCase();
-      markDirty(); schedulePreview();
-    });
-  }
-  for (const k of ['showRef', 'auto', 'penOnly']) {
-    $('#s_' + k).addEventListener('change', e => { S.settings[k] = e.target.checked; markDirty(); redrawTrain(); });
-  }
-  $('#reroll').onclick = () => { S.settings.seed = (S.settings.seed + 1) % 100000; markDirty(); schedulePreview(); };
-
-  for (const id of ['profSelW', 'profSelT']) $('#' + id).addEventListener('change', e => switchProfile(e.target.value));
-  $('#pNew').onclick = profNew;
-  $('#pRename').onclick = profRename;
-  $('#pDelete').onclick = profDelete;
-  $('#pExport').onclick = profExport;
-  $('#pImport').onclick = () => $('#pFile').click();
-  $('#pFile').addEventListener('change', e => { const f = e.target.files[0]; e.target.value = ''; if (f) profImport(f); });
-
-  $$('#catSeg button').forEach(b => b.onclick = () => {
-    T.cat = b.dataset.cat; T.ch = CATS[T.cat].chars[0]; T.draft = []; T.active = null; renderTrain();
-  });
-  $('#tUndo').onclick = () => { if (T.active) return; T.draft.pop(); redrawTrain(); };
-  $('#tClear').onclick = () => { if (T.active) return; T.draft = []; redrawTrain(); };
-  $('#tSave').onclick = saveDraft;
-  $('#tPrev').onclick = () => stepChar(-1);
-  $('#tNext').onclick = () => stepChar(1);
-  $('#tDelAll').onclick = deleteAllVariants;
-
-  $('#expPng').onclick = exportPNG;
-  $('#expPdf').onclick = exportPDF;
-
-  // Größenänderungen (nur bei geänderter Breite neu zeichnen)
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(() => {
-      if (!$('#viewTrain').hidden && resizeTrainCanvas()) redrawTrain();
-    }).observe($('#cvWrap'));
-    new ResizeObserver(() => {
-      const w = $('#pages').clientWidth;
-      if (w && Math.abs(w - lastPvWidth) > 1 && !$('#viewWrite').hidden) schedulePreview();
-    }).observe($('#pages'));
-  } else {
-    window.addEventListener('resize', () => { if (!$('#viewTrain').hidden && resizeTrainCanvas()) redrawTrain(); schedulePreview(); });
-  }
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
-  window.addEventListener('pagehide', flush);
-}
-
-/* ============================================================
-   Start
-   ============================================================ */
-async function boot() {
-  bindUI();
-  try {
-    await DB.open();
-    const profs = await DB.getAll('profiles');
-    const meta = await DB.get('meta', 'state');
-    S.profiles = (profs || []).filter(p => p && p.id && p.glyphs).sort((a, b) => (a.created || 0) - (b.created || 0));
-    if (meta) {
-      for (const k of Object.keys(DEFAULTS)) {
-        if (meta.settings && typeof meta.settings[k] === typeof DEFAULTS[k]) S.settings[k] = meta.settings[k];
-      }
-      S.activeId = meta.activeId;
-      S.text = typeof meta.text === 'string' ? meta.text.slice(0, MAX_TEXT) : '';
-    }
-    setStatus('saved');
-    if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
-  } catch (e) {
-    console.error(e);
-    DB.db = null;
-    setStatus('nodb');
-  }
-  if (!S.profiles.length) {
-    const p = newProfile('Meine Handschrift');
-    S.profiles.push(p);
-    markDirty(p.id);
-  }
-  if (!S.profiles.some(p => p.id === S.activeId)) { S.activeId = S.profiles[0].id; markDirty(); }
-  syncUI();
-  fillProfileSelects();
-  showView('write');
-}
-
-if (window.__SW_TEST) {
-  window.__SW_TEST({ computeLayout, buildPDF, drawPage, rulingSegs, S, DEFAULTS, G, ALL_CHARS, finalizeStroke, sanitizeGlyphs });
-} else {
-  boot();
-}
-})();
-</script>
-</body>
-</html>
+  toastTimer = setT
